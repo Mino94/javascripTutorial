@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<h1>1번째 버전 쳬육관 이용 요금</h1>
+
+<form>
+	<p>기본 사용료(2명, 4시간) 40,800원</p>
+	<label><input type="checkbox" name="price" id="one" value="20000" onclick="getCheckboxValue()"> 야간조명(20,000원)</label>
+	<label><input type="checkbox" name="price" id="two" value="4000" onclick="getCheckboxValue()"> 베구 네트*2명 (4000원)</label>
+	<label><input type="checkbox" name="price" id="three" value="5000" onclick="getCheckboxValue()"> 베구 * 10개 (5000원)</label>
+</form>
+<br>
+합계 금액 <input type="text" id="result" name="result" value="" size="5"> 원 형
+
+<br><br>
+
+<h1>2번째 버전 쳬육관 이용 요금</h1>
+
+<form name="price2">
+	<input type="checkbox" onclick="sum(0)" id="one" value="20000">야간조명(20,000원)<br> 	<!-- 0번요소 -->
+	<input type="checkbox" onclick="sum(1)" id="two" value="4000">베구 네트*2명 (4000원)<br> 	<!-- 1번 요소 -->	
+	<input type="checkbox" onclick="sum(2)" id="three" value="5000">베구 * 10개 (5000원)<br><br>	<!-- 2번 요소 -->
+	합계금액 : <input type="text" id="total" value="0" size="5">원정						<!-- 3번요소 -->
+</form>
+
+<script type="text/javascript">
+let values = new Array(3); // 배열을 선언하여 값 불러오기
+values[0] = parseInt(document.getElementById('one').value);
+values[1] = parseInt(document.getElementById('two').value);
+values[2] = parseInt(document.getElementById('three').value);
+
+let total = parseInt(document.getElementById('total').value);
+
+function sum(num) {
+	if(document.price2.elements[num].checked == true){
+		total = total + values[num];
+	}else{
+		total = total - values[num];
+	}
+	document.price2.elements[3].value = total + 40800;	
+}
+
+function getCheckboxValue(){
+	// 선택된 목록 가져오기
+	  const query = 'input[name="price"]:checked';
+	  const selectedEls = document.querySelectorAll(query);
+	  
+	  // 선택된 목록에서 value 찾기
+	  let result = parseInt(0);
+	  selectedEls.forEach((el) => {
+	    result = result + parseInt(el.value);
+	  });
+	  
+	  // 출력
+	  document.getElementById('result').value = result + 40800;
+}
+
+</script>
+</body>
+</html>
